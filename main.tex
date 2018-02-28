@@ -160,7 +160,7 @@ This proposed research can be categorised as attempting to fulfil the following 
 \item In learning to rank, the initial sample retrieval is not a trivial task and one cannot choose the way to retrieve these document in an arbitrary way, learn which to choose
 \end{enumerate}
 
-\subsection{State of the Art}
+\subsection{State of the Art} \label{sec:stateart}
 % Introduction and Neural Networks
 As mentioned before, NNs are oft used in image recognition and natural language processing, with impressive performance gains being seen.
 In contrast, less work has been done with NNs in IR, and some of the exiting work has struggled to obtain good evaluation scores.
@@ -171,10 +171,9 @@ One such application of NNs in IR has been to do with word embeddings. These are
 The reason this is applicable to IR is that the vocabulary mismatch problem can occur frequently in ad-hoc retrieval. 
 The vocabulary mismatch problem occurs when a user expresses an idea in query using different language compared to that in documents.
 
-Something that neural networks already do reasonably well is the learning of embeddings which can be applied to information retrieval. Word Embeddings are high level vectors used to represent words in text. These vectors can represent key relationships between words. This can be successfully leveraged in order assist the vocabulary mismatch problem in information retrieval. This, in a nutshell is the use of different words in the query to represent the same concepts found in documents. If, through word embeddings words are seen to be ``semantically'' similar then these may well be \textbf{a good match}.
-EXAMPLES~\cite{NEEDED}
-Perhaps more important to our proposed work is the idea of purposefully creating these embeddings with the retrieval task in mind. Relevance based word embeddings~\cite{NEEDED}.
+Zuccon et al~\cite{zuccon2015integrating} offer an in depth investigation into the use of word embeddings in IR, with suggestions for how best to use them well.  Zamani et al~\cite{zamani2017relevance} present an even more applicable study of word embeddings by investigating how to construct the embeddings with information regarding \textit{relevance} rather than semantic similarity. This showed significant improvements when using word embeddings in IR tasks.
 
+% Higher level embeddings
 Embeddings also come in the form of paragraph or sentence embeddings which aim to model larger sections of text.
 
 Ai et al~\cite{ai2016analysis} present an example of paragraph embeddings in IR.
@@ -184,29 +183,24 @@ They specifically evaluate with an ad-hoc search task
 Palangi et al~\cite{palangi2016deep} use sentence embeddings, and show that they can outperform the above discussed paragraph vector model of ~\cite{ai2016analysis} in an ad-hoc web search setting. The neural network used to create the sentence embeddings uses long short term memory, which is useful in the creation of sentence embeddings as the words from the beginning of the sentence are used throughout the training phase to learn a representation for the full sentence.
 
 We can see then, that NN learned embeddings of different sizes can be useful for information retrieval. We now move on to the use of neural networks in a more general sense, which provide interesting results.
-%% Neural Ranking Models
-There are many examples of the use of neural networks in ranking models, some of which perform markedly better than others. Of key interest 
 
-% DSSM & CDSSM
-Huang et al~\cite{huang2013learning} present a deep structured semantic model (DSSM) which is trained on click data from query logs in a web search setting. 
-The objective function of the neural network is configured to optimize ranking. 
-This work was extended by Shen et al~\cite{Shen:2014:LSR:2567948.2577348} through use of a convolutional neural network. 
-This additionally allows information from different context levels to be factored into the NN during training, resulting in a more general, better performing model. 
-Further, more detailed,  explanation can be seen in ~\cite{shen2014latent}.
+%% Neural Ranking Models
+%% -- This is all much too long, needs cut down considerably (it is just copied and pasted from the other essay...)
+There are many examples of the use of neural networks in ranking models, some of which perform markedly better than others. Of key interest are the DSSM (Deep Structured Semantic Model) by Huang et al~\cite{huang2013learning} and the convolutional extension by Shen et al~\cite{Shen:2014:LSR:2567948.2577348}. Both are trained on click through logs from a web search engine, while the convolutional variant allows for the inclusion of additional interacting layers in training. More detail can be seen in~\cite{shen2014latent}.
 
 % MATCH PYRAMID
-Pang et al~\cite{pang2016study} employ MatchPyramid~\cite{Pang:2016:TMI:3016100.3016292} in an attempt to improve upon the two above neural network models. This is a text matching neural network framework which tries to model text as images. It shows an impressive boost in performance when compared with the other techniques mentioned above in this section, although it does not manage to outperform BM25, a standard matching algorithm in IR. ARC-I and ARC-II are two of the neural matching architectures that are used in comparisons in~\cite{pang2016study}. Both are proposed in~\cite{hu2014convolutional} and are convolutional text matching neural networks that can applied in much the same way as the above. Again, however, these struggle to outperform more classical techniques.
+Pang et al~\cite{pang2016study} employ MatchPyramid~\cite{Pang:2016:TMI:3016100.3016292} in an attempt to improve upon the two above neural network models. This is a text matching neural network framework which tries to model text as images. Although performing well, it does not outperform BM25, a classic IR ranking technique. ARC-I and ARC-II~\cite{hu2014convolutional} tell a similar story.
 
 % DRMM
-Guo et al~\cite{guo2016deep} specifically present the Deep Relevance Matching Model which is tailored for ad-hoc retrieval, in that it is concerned with relevance specifically, rather than semantic matching. This is noted in~\cite{pang2016study} where Pang et al concede their semantic model is not necessarily optimized for ad-hoc retrieval and needs more investigation. Notably, by altering the neural network to account for this difference in task, we see that the results in fact do beat BM25 and other traditional performance benchmarks, showing that by careful consideration neural networks can be effectively applied to ad-hoc retrieval.
+Guo et al~\cite{guo2016deep} present the DRRM(Deep Relevance Matching Model), a neural ranking model tuned for relevance in ad-hoc retrieval. This does beat BM25, and demonstrates that NNs can be tweaked to perform ad-hoc retrieval well.
 
-Mitra et al~\cite{mitra2016learning} demonstrate significant retrieval performance gains with their new model which aims to take into account different levels of context during matching. Interestingly, instead of throwing a neural network at the problem in the hope that some interesting or helpful results will be found, Mitra et al act in a much more targeted way, by first analysing the properties of a well functioning retrieval system. That is, a combination of exact term matching for very specific queries, but also the ability to adapt when the vocabulary mismatch problem presents itself. The vocabulary mismatch problem is prevalent in IR and occurs when users represent ideas in queries with different terms from those which appear in relevant documents. In fact, this targeted approach reminds us of comments made at NN4IR at SIGIR~\footnote{\url{http://nn4ir.com/sigir2017/slides/08_WrapUp.pdf}}, which emphasize that often it is important to choose the right tool for the job. This paper also notes that there is more to IR than solving the vocabulary mismatch problem, and although this is important, a thorough model will address many other concerns.
+Mitra et al~\cite{mitra2016learning} offer discussion of how a well performing retrieval system operates. They discuss combining exact term matching with solutions to the vocabulary mismatch problem.
 
-Hui et al~\cite{hui2017position} is an extension along the same lines, however much focus is given to understanding and correctly modelling the
-dependency between terms in the queries themselves, resulting in a more complex model with better performance. They refer to this model as ``Positional Aware'', in that focus is given to the relative position of terms in queries in documents during training. They suggest that the technology could be used a re-ranking model for further improved performance.
+\textbf{Hui et al~\cite{hui2017position} is an extension along the same lines, however much focus is given to understanding and correctly modelling the
+dependency between terms in the queries themselves, resulting in a more complex model with better performance. They refer to this model as ``Positional Aware'', in that focus is given to the relative position of terms in queries in documents during training. They suggest that the technology could be used a re-ranking model for further improved performance.}
 
 %% The Key End-to-End Example
-Perhaps most close to what we aim to achieve with this proposed research is the work of Xiong et al~\cite{xiong2017knrm} in the production of K-NRM, which is a kernel based neural ranking model which combines many of the ideas mentioned in other works above. Most notably the model is trained end-to-end on query document pairs.
+Perhaps most close to what we aim to achieve with this proposed research is the work of Xiong et al~\cite{xiong2017knrm} in the production of K-NRM, which is a kernel based neural ranking model which combines many of the ideas mentioned in other works above. Most notably the model is trained end-to-end on query document pairs. It contains several layers including one for representing documents and queries and one for learning to rank. Its strong performance indicates that the proposed end-to-end model in this paper stands a good chance of working.
 
 %% Weak Supervision to Deal with the Lack of Training Data
 Further interesting work in the realm of neural IR are those papers which mention using weak supervision signals for training. 
@@ -222,7 +216,7 @@ We can see then, that the use of NNs in IR, and especially ad-hoc IR is an ongoi
 Thus, it is clear that more investigation is needed into where NNs are applicable to ad-hoc retrieval.
 We have additionally seen some work concerning the training of neural models, this is another aspect which needs more research. If our end goal is trained models which can perform on unseen collections and queries it is going to be necessary to identify which training data is most suitable.
 
-\subsection{Our Solution}
+\subsection{Our Solution}\label{sec:our-solution}
 % WE ARE WELL SUITED TO TACKLING THIS PROBLEM
 % terrier is actively developed at university of glasgow
 % promising team.
@@ -231,21 +225,20 @@ We have additionally seen some work concerning the training of neural models, th
 % WE HAVE A PROMISING IDEA (END TO END)
 Given the above discussion of the state of the art and the objectives we defined in \S~\ref{sec:objectives} we now lay out a summary of our proposed solution.
 
-We will begin with a rigorous investigation of the areas in which neural networks perform well and poorly. This will require much reference to the state of the art and other research (see \S~{sec:stateart}. Through this, we hope to surmise which areas require the most attention in the next stages of research in the proposed project. Whether this is because these areas show much potential for performance gains or because they have not yet been investigated enough will be entirely dependent on our findings.
-
-In this proposal, however, we can lay out the sections which we intend to investigate. That is
+We will begin with a rigorous investigation of the areas in which neural networks perform well and poorly. This will require much reference to the state of the art and other research (see \S~\ref{sec:stateart}. Through this, we hope to surmise which areas require the most attention in the next stages of research in the proposed project. Whether this is because these areas show much potential for performance gains or because they have not yet been investigated enough will be entirely dependent on our findings. Specifically we aim to investigate the following areas individually:
 \begin{itemize}
-\item{Neural networks to produce word representations, these may be word embeddings or higher level}
-\item{neural learning to rank}
-\item{neural document comparison}
-\item{making use of document collection features - lexicons and terms statistics}
+\item{Neural networks to produce representations of queries and documents, these may be word embeddings or higher level}
+\item{Neural learning to rank and neural ranking.}
+\item{Training data availability and quality}
 \end{itemize}
 
 Given a thorough look at these areas we expect to see avenues for engineering potential improvements to the current state of the art.
 
-It should be noted that for each of the neural based tasks we wish to generate and optimise a stand alone neural network based solution.
+It should be noted that for each of the neural based tasks we wish to generate and optimise a stand alone neural network based solution. We wish to include a working version of each of these solutions in a new release of the Terrier search engine. Terrier is actively developed by IR researchers are the University of Glasgow and so the wealth of local knowledge of its workings will be invaluable.
 
-Further for each of these tasks we wish to perform a specific investigation into the effectiveness of various sets of training data. Specifically we wish to answer how much training data is necessary. Whether this training data can come in the form of weakly supervised signals produced from other retrieval models.
+Further for each of these tasks we wish to perform a specific investigation into the effectiveness of various sets of training data. Specifically we wish to answer how much training data is necessary.
+We also wish to discover whether this training data can come in the form of weakly supervised signals produced from other retrieval models as is mentioned in \S~\ref{sec:stateart}. This may be true for some aspects but not for others.
+It is possible that we may have to produce our own training data, which would be expensive and time consuming, but could lead to more high quality models.
 
 The final stage of the proposal comes in the form of combining these neural network solutions in to one large end to end system. Specifically this section would aim to take only a document collection and a query as an input layer and feed forward into the various other sections from there. This will require investigation into additional neural architectures with input features not yet discussed in the state of the art literature summarised above. Although learning to rank is machine learning technique already in existence which considers query features, query independent document features and query dependent document features, we do not know of any ad-hoc retrieval paradigms which consider the use of corpus features in making decisions about a retrieval tactic. \remove{Add an image of your proposed neural network (or something like it)}
 
