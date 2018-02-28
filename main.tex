@@ -1,5 +1,338 @@
-\documentclass{article}
+\documentclass[11pt,english,twocolumn]{article}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{pslatex}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage{url}
+%Definitions from Simon's mya4.sty
+% Set the paper size to A4
+\setlength{\paperheight}{297mm}
+\setlength{\paperwidth}{210mm}
+% Define commands which allow the width and height of the text
+% to be specified. Centre the text on the page.
+\newcommand{\settextwidth}[1]{
+\setlength{\textwidth}{#1}
+\setlength{\oddsidemargin}{\paperwidth}
+\addtolength{\oddsidemargin}{-\textwidth}
+\setlength{\oddsidemargin}{0.5\oddsidemargin}
+\addtolength{\oddsidemargin}{-1in}
+}
+\newcommand{\settextheight}[1]{
+\setlength{\textheight}{#1}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\topmargin}{\paperheight}
+\addtolength{\topmargin}{-\textheight}
+\setlength{\topmargin}{0.5\topmargin}
+\addtolength{\topmargin}{-1in}
+}
+\addtolength{\topsep}{-3mm}% space between first item and preceding paragraph.
+\addtolength{\partopsep}{-3mm}% extra space added to \topsep when environment starts a new paragraph.
+\addtolength{\itemsep}{-5mm}% space between successive items.
+
+%End of Simon's mya4.sty
+\usepackage{graphicx}%This is necessary and it must go after mya4
+\settextwidth{176mm}
+\settextheight{257mm}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\def\baselinestretch{0.95}
+
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*1}{*1}
+\titlespacing{\subsection}{0pt}{*1}{*0}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\titlespacing{\paragraph}{0pt}{*0}{*1}
+\titleformat*{\paragraph}{\itshape}{}{}{}
+
+% kelvins top
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage[newfloat]{minted}
+\usemintedstyle{emacs}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newenvironment{codelisting}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Code Sample}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+% Use “\cite{NEEDED}” to get Wikipedia-style “citation needed” in document
+\usepackage{ifthen}
+\let\oldcite=\cite
+\renewcommand\cite[1]{\ifthenelse{\equal{#1}{NEEDED}}{\ensuremath{^\texttt{[citation~needed]}}}{\oldcite{#1}}}
+
+\newcommand{\remove}[1]{\textcolor{red}{#1}}
+
 \begin{document}
-(Type your content here.)
+\title{Improving Information Retrieval with Neural Networks}
+
+\author{Kelvin Fowler}
+\date{2083905f}
+\maketitle
+
+\section{Proposed Research}
+\subsection{Defining the Problem}
+% What is ad-hoc retrieval?
+Ad-hoc retrieval is the subsection of information retrieval (IR) which aims to provide relevant results to users based on any given entered query. ad-hoc retrieval encompasses web search as well as other more specific tasks. It has long been a goal in IR to make ad-hoc retrieval perform as well as possible. Indeed, as new IR techniques are discovered they are applied to the ad-hoc task. These have included language modelling, learning to rank and query expansion.
+
+% What are neural networks?
+Neural networks (NNs) are a machine learning technique which aims to model the working of the human brain, to some extent. They are trained with sample inputs and outputs, with the goal being that when given new inputs they can effectively predict a likely output.
+NNs operate using layers, which can either be defined or hidden.
+Defined layers do some specific defined processing of the input to move one step closer to output. Hidden layers also do this, but the machine is left to infer what they should do given training inputs and outputs.
+This training data can be positive or negative, and often it is preferable to have both types.
+
+% Neural Networks in related fields
+Neural networks have shown considerable performance increases in related fields to information retrieval.
+In particular, neural networks have become very popular in image recognition tasks, such as the reading of handwritten text or image location estimation.
+Perhaps more close to IR, the field of Natural Language Processing (NLP) has also made significant use of NNs. NLP often aims to extract information from text such as named entity recognition, sentiment analysis and other things.
+A highly relevant example comes from Collobert and Weston~\cite{collobert2008unified} who created a unified architecture for NLP using NNs which has proven to be very successful in performing multiple distinct NLP tasks using only one neural network.
+
+% Our idea --- !
+% HERE IS A WELL DEFINED PROBLEM
+This paper proposes to apply neural networks to information retrieval, and in specific the ad-hoc search task.
+The aim is to improve the performance of ad-hoc search over existing neural and non-neural methods. 
+Further, in a similar vein to ~\cite{collobert2008unified} we propose the creation of a unified ad-hoc architecture produced with extensive use of neural networks. 
+
+Although, superficially, one may assume that IR and NLP have much in common, (both deal heavily with processing of text), the gains seen in NLP due to NNs have not been observed in the realm of IR.
+
+Billions of humans perform ad-hoc search every day on internet search engines such as Bing~\footnote{\url{https://bing.com}} and Google~\footnote{\url{http://google.com}}. 
+Although these proprietary systems are well developed and clearly perform very well, their inner workings are hidden from view so as to maintain competitive advantage.
+Thus, the optimization of a public open source search engine would be highly beneficial to the research and open source community.
+
+% This shouldn't go here
+\textbf{IR research is conducted on open source search engines such as Terrier, Lucene and Indri.~\cite{NEEDED}
+These are the platforms on which cutting edge IR research is developed. They can be deployed by anyone for almost any purpose, both online search and offline document search.}
+
+If it is the case that neural networks can be used to successfully improve the performance of these open source search engines and more generally the ad-hoc task, then this is of utmost importance to uncover and investigate in order to drive the research community forward to ever improving ad-hoc search results.
+
+The goal of this proposed research is to put this hypotheses to the test. 
+Can neural networks be effectively used to improve the ad-hoc search task in a general, end-to-end way?
+If so can we incorporate this into open source search engines and improve ad-hoc retrieval in general?
+
+
+
+\subsection{Key Ideas In A Nutshell}
+% Neural Representation
+We aim to extensively investigate neural based representations of text in queries and neural based ranking models in order to understand the best use of neural networks in ad-hoc IR.
+Following this we wish to create an end to end comprehensive neural based system for ad-hoc IR.
+The key idea is that this platform will perform well on unseen queries and corpora by virtue of extensive training and optimisation.
+
+\paragraph{Example}
+% Example of govt employees -- PRETTY LONG
+An ad-hoc retrieval task is defined for a government organisation. They have millions of digitised documents which must be made searchable by civil servants. 
+The collection of documents is indexed and has its prevalent features compared to those of previously indexed collections seen by a neural network. 
+This forms one part of the input. 
+A user enters a query, which has other more specific features (i.e. it contains a date, or is very long). 
+This query forms another input layer. 
+These two input layers inform parameters of a neural based ranking model which tweaks its further layers appropriately to deliver the best retrieval performance possible based on previous training data. 
+\remove{The system continues to learn and improve over time using click through data.} % You never reference this aspect again
+The users of the search system are satisfied by its performance as it is tailored specifically to their needs.
+
+\subsection{Objectives}\label{sec:objectives}
+% HERE IS WHAT WE HOPE TO ACHIEVE
+This proposed research can be categorised as attempting to fulfil the following objectives. In addition supplementary objectives are provided which are not absolute necessities but would be a good addition to the research.
+\newline
+\subsubsection*{Objectives}
+\vspace{0.5em}
+\begin{enumerate}[label=\textbf{Obj.\arabic*}, wide=\parindent]
+\item To define and categorize which specific aspects of the ad-hoc retrieval process are most improved through use of neural networks and which are not.
+\item To deliver a neural network based system capable of altering its underlying retrieval technique in order to improve results.
+\item To deliver a neural network based system which is trained on weak and strong supervision signals, which can demonstrate significant performance increases on unseen queries against unseen collections vs. baselines.
+\item To contribute to the growing scientific community around neural information retrieval.
+\item To advance neural networks in IR back to the forefront of NN based research, where in the last few years, other fields such as NLP have seen great increases, while IR has been left behind.
+\end{enumerate}
+
+\subsubsection*{Supplementary Objectives}
+\vspace{0.5em}
+\begin{enumerate}[label=\textbf{Sup. Obj.\arabic*}, wide=\parindent]
+\item To provide trained neural networks for further researchers to build upon.
+\item To update the Terrier search engine to include neural network based features.
+\end{enumerate}
+
+\remove{this list below needs to move to somewhere more appropriate}
+
+\begin{enumerate}
+\item Use NNs to predict which type of retrieval model will suit a given situation best 
+\item In learning to rank, the initial sample retrieval is not a trivial task and one cannot choose the way to retrieve these document in an arbitrary way, learn which to choose
+\end{enumerate}
+
+\subsection{State of the Art}
+% Introduction and Neural Networks
+As mentioned before, NNs are oft used in image recognition and natural language processing, with impressive performance gains being seen.
+In contrast, less work has been done with NNs in IR, and some of the exiting work has struggled to obtain good evaluation scores.
+The popularity of the field is, however, growing with several events occurring at the latest SIGIR conference devoted solely to the use of NNs in IR \footnote{\url{http://nn4ir.com/sigir2017/}} \footnote{\url{https://neu-ir.weebly.com/}}.
+
+% Word Embeddings
+One such application of NNs in IR has been to do with word embeddings. These are vector space representations of words, with which semantic relationships between words can be inferred. 
+The reason this is applicable to IR is that the vocabulary mismatch problem can occur frequently in ad-hoc retrieval. 
+The vocabulary mismatch problem occurs when a user expresses an idea in query using different language compared to that in documents.
+
+Something that neural networks already do reasonably well is the learning of embeddings which can be applied to information retrieval. Word Embeddings are high level vectors used to represent words in text. These vectors can represent key relationships between words. This can be successfully leveraged in order assist the vocabulary mismatch problem in information retrieval. This, in a nutshell is the use of different words in the query to represent the same concepts found in documents. If, through word embeddings words are seen to be ``semantically'' similar then these may well be \textbf{a good match}.
+EXAMPLES~\cite{NEEDED}
+Perhaps more important to our proposed work is the idea of purposefully creating these embeddings with the retrieval task in mind. Relevance based word embeddings~\cite{NEEDED}.
+
+Embeddings also come in the form of paragraph or sentence embeddings which aim to model larger sections of text.
+
+Ai et al~\cite{ai2016analysis} present an example of paragraph embeddings in IR.
+In competition, Palangi et al~\cite{palangi2016deep} outperform this paragraph embedding model with sentence embeddings.
+They specifically evaluate with an ad-hoc search task
+
+Palangi et al~\cite{palangi2016deep} use sentence embeddings, and show that they can outperform the above discussed paragraph vector model of ~\cite{ai2016analysis} in an ad-hoc web search setting. The neural network used to create the sentence embeddings uses long short term memory, which is useful in the creation of sentence embeddings as the words from the beginning of the sentence are used throughout the training phase to learn a representation for the full sentence.
+
+We can see then, that NN learned embeddings of different sizes can be useful for information retrieval. We now move on to the use of neural networks in a more general sense, which provide interesting results.
+%% Neural Ranking Models
+There are many examples of the use of neural networks in ranking models, some of which perform markedly better than others. Of key interest 
+
+% DSSM & CDSSM
+Huang et al~\cite{huang2013learning} present a deep structured semantic model (DSSM) which is trained on click data from query logs in a web search setting. 
+The objective function of the neural network is configured to optimize ranking. 
+This work was extended by Shen et al~\cite{Shen:2014:LSR:2567948.2577348} through use of a convolutional neural network. 
+This additionally allows information from different context levels to be factored into the NN during training, resulting in a more general, better performing model. 
+Further, more detailed,  explanation can be seen in ~\cite{shen2014latent}.
+
+% MATCH PYRAMID
+Pang et al~\cite{pang2016study} employ MatchPyramid~\cite{Pang:2016:TMI:3016100.3016292} in an attempt to improve upon the two above neural network models. This is a text matching neural network framework which tries to model text as images. It shows an impressive boost in performance when compared with the other techniques mentioned above in this section, although it does not manage to outperform BM25, a standard matching algorithm in IR. ARC-I and ARC-II are two of the neural matching architectures that are used in comparisons in~\cite{pang2016study}. Both are proposed in~\cite{hu2014convolutional} and are convolutional text matching neural networks that can applied in much the same way as the above. Again, however, these struggle to outperform more classical techniques.
+
+% DRMM
+Guo et al~\cite{guo2016deep} specifically present the Deep Relevance Matching Model which is tailored for ad-hoc retrieval, in that it is concerned with relevance specifically, rather than semantic matching. This is noted in~\cite{pang2016study} where Pang et al concede their semantic model is not necessarily optimized for ad-hoc retrieval and needs more investigation. Notably, by altering the neural network to account for this difference in task, we see that the results in fact do beat BM25 and other traditional performance benchmarks, showing that by careful consideration neural networks can be effectively applied to ad-hoc retrieval.
+
+Mitra et al~\cite{mitra2016learning} demonstrate significant retrieval performance gains with their new model which aims to take into account different levels of context during matching. Interestingly, instead of throwing a neural network at the problem in the hope that some interesting or helpful results will be found, Mitra et al act in a much more targeted way, by first analysing the properties of a well functioning retrieval system. That is, a combination of exact term matching for very specific queries, but also the ability to adapt when the vocabulary mismatch problem presents itself. The vocabulary mismatch problem is prevalent in IR and occurs when users represent ideas in queries with different terms from those which appear in relevant documents. In fact, this targeted approach reminds us of comments made at NN4IR at SIGIR~\footnote{\url{http://nn4ir.com/sigir2017/slides/08_WrapUp.pdf}}, which emphasize that often it is important to choose the right tool for the job. This paper also notes that there is more to IR than solving the vocabulary mismatch problem, and although this is important, a thorough model will address many other concerns.
+
+Hui et al~\cite{hui2017position} is an extension along the same lines, however much focus is given to understanding and correctly modelling the
+dependency between terms in the queries themselves, resulting in a more complex model with better performance. They refer to this model as ``Positional Aware'', in that focus is given to the relative position of terms in queries in documents during training. They suggest that the technology could be used a re-ranking model for further improved performance.
+
+%% The Key End-to-End Example
+Perhaps most close to what we aim to achieve with this proposed research is the work of Xiong et al~\cite{xiong2017knrm} in the production of K-NRM, which is a kernel based neural ranking model which combines many of the ideas mentioned in other works above. Most notably the model is trained end-to-end on query document pairs.
+
+%% Weak Supervision to Deal with the Lack of Training Data
+Further interesting work in the realm of neural IR are those papers which mention using weak supervision signals for training. 
+The standard is to use strong signals like relevance judgements in order to train models directly (i.e. this document is relevant for this query). 
+There have been several different methods for producing these weak training signals. 
+MacAvaney et al~\cite{DBLP:journals/corr/MacAvaneyHY17} produce these weak training signals from the implicit relevance assumed to be in existence between the headline of a news article and its contents. 
+This has some issues regarding a lack of negative training data and confusing headline wording.
+Deghani et al~\cite{dehghani2017neural} propose to use existing IR techniques to provide training data for neural models. 
+;Specifically they use the BM25 measure on millions of queries to produce weak training data giving some indication of relevance.
+
+% Conclusion to the State of the Art
+We can see then, that the use of NNs in IR, and especially ad-hoc IR is an ongoing research area. It is not always as simple as tossing an NN at a problem and letting it work it's magic, and often NNs are not even able to outperform more classical approaches.
+Thus, it is clear that more investigation is needed into where NNs are applicable to ad-hoc retrieval.
+We have additionally seen some work concerning the training of neural models, this is another aspect which needs more research. If our end goal is trained models which can perform on unseen collections and queries it is going to be necessary to identify which training data is most suitable.
+
+\subsection{Our Solution}
+% WE ARE WELL SUITED TO TACKLING THIS PROBLEM
+% terrier is actively developed at university of glasgow
+% promising team.
+% wealth of knowledge of codebase
+% machine learning experts in Glasgow also (simon rogers, ke yuan)
+% WE HAVE A PROMISING IDEA (END TO END)
+Given the above discussion of the state of the art and the objectives we defined in \S~\ref{sec:objectives} we now lay out a summary of our proposed solution.
+
+We will begin with a rigorous investigation of the areas in which neural networks perform well and poorly. This will require much reference to the state of the art and other research (see \S~{sec:stateart}. Through this, we hope to surmise which areas require the most attention in the next stages of research in the proposed project. Whether this is because these areas show much potential for performance gains or because they have not yet been investigated enough will be entirely dependent on our findings.
+
+In this proposal, however, we can lay out the sections which we intend to investigate. That is
+\begin{itemize}
+\item{Neural networks to produce word representations, these may be word embeddings or higher level}
+\item{neural learning to rank}
+\item{neural document comparison}
+\item{making use of document collection features - lexicons and terms statistics}
+\end{itemize}
+
+Given a thorough look at these areas we expect to see avenues for engineering potential improvements to the current state of the art.
+
+It should be noted that for each of the neural based tasks we wish to generate and optimise a stand alone neural network based solution.
+
+Further for each of these tasks we wish to perform a specific investigation into the effectiveness of various sets of training data. Specifically we wish to answer how much training data is necessary. Whether this training data can come in the form of weakly supervised signals produced from other retrieval models.
+
+The final stage of the proposal comes in the form of combining these neural network solutions in to one large end to end system. Specifically this section would aim to take only a document collection and a query as an input layer and feed forward into the various other sections from there. This will require investigation into additional neural architectures with input features not yet discussed in the state of the art literature summarised above. Although learning to rank is machine learning technique already in existence which considers query features, query independent document features and query dependent document features, we do not know of any ad-hoc retrieval paradigms which consider the use of corpus features in making decisions about a retrieval tactic. \remove{Add an image of your proposed neural network (or something like it)}
+
+\section{Methodology}
+% HERE IS HOW WE PLAN TO BUILD ON OUR IDEA TO ACHEIVE IT
+\subsection{Investigation into Aspects of ad-hoc IR Susceptible to Improvement from Neural Networks \textbf{WP1}}
+This initial work package deals primarily with investigation and initial experimentation. 
+It will also serve as the staging ground where neural networks can be incorporated into the Terrier information retrieval platform.
+This stage will be very much about taking each stage of ad hoc retrieval at once and verifying the results of the state of the art.
+We will also try to investigate further areas which are missing from the literature.
+The stages are:
+representation - both word and more (tri-gram, sentence, paragraph)
+ranking models
+\textbf{Deliverable} for this work package is raw data amounting to retrieval effectiveness of the different sections of the retrieval system with different neural network configurations. This will mean verifying the results of the literature mentioned in the state of the art section. This data will give definitive answers on the best current neural techniques. We also aim to analyse new methods not yet tried in the literature \remove{ LIKE WHAT? }
+
+\subsection{Generation of Best Model at Each Stage (\textbf{WP2})}
+This stage will consolidate the work of \textbf{WP1} into a working model in the Terrier platform. Based on the results each stage will be integrated into terrier in its most optimal way. This will mean that there will be various stand alone neural features present that can be toggled on or off. \textbf{Deliverable}. From WP1 we will know the best ways to integrate neural networks in the ad-hoc task. This stage will involve the integration of these methods into the Terrier search engine. The deliverable will be a working version of Terrier with toggleable neural network options.
+
+\subsection{Investigation into Effect Of Training Data (\textbf{WP3})}
+Much of the literature presents an investigation into the effect of different training data on neural methods. For example ~\cite{} discuss evaluation results of word embeddings trained on a different corpus from the evaluation corpus and discuss the flexibility of word embeddings to allow this.
+
+An interesting question is to ask whether this is true for other scenarios. Can neural ranking models be trained on ground truths distinct from evaluation sets.
+
+This work package also includes the investigation into using weak supervision to train neural models. This means using some existing retrieval technique such as BM25 in order to gain some weak idea of relevant documents.
+\textbf{Deliverable}
+The deliverable at this stage is data showing the different retrieval performance of out various neural based stages using different training data. This section will require extensive training and comparative experiments.
+
+\subsection{A Combined Neural Based Platform \textbf{WP4}}
+This will almost certainly be the most difficult and time consuming work package. Based on the best models from the above studies we aim to factor these into one all encompassing neural network which can make decision regarding the best way to perform a given query on a given corpus.
+This will introduce new complexities not seen in the above studies such as the use of corpus features in training.
+\textbf{Deliverable} The deliverable at this stage is a working end to end neural based ad-hoc retrieval engine working inside Terrier. This means it's only inputs should be a document collection and a query. The neural model can then decide how best to action this query on the corpora and move through the neural stages in the best way possible.
+
+\subsection{Evaluating on Unseen Corpora \textbf{WP5}}
+Following the creation of the unified neural retrieval model it is necessary to evaluate its effectiveness on unseen ad-hoc search tasks. This means that none of the evaluation data must have been part of the training data. \textbf{Deliverable} at this stage is a detailled report showing the effectiveness of this end to end neural ad-hoc retrieval platform on unseen corpora and queries. This means the training data may not be representative of the queries or documents, but will hopefully be general enough to still perform well.
+
+\subsection{Providing Training Data and Models \textbf{WP6}}
+A key aspect of this proposed research is to provide data for others to use in future research. For all of the neural configurations produced in the above work packages we will prepare and provide data sets and trained models in order that other researchers can reproduce and verify our results.
+
+\subsection{Reporting Verifiable Results \textbf{WP7}}
+This work package comprises the final report produced following the completion of the project. It aims to put forth a detailed and thorough explanation of the work performed at each stage.
+
+\section{Measurable Outcomes}
+There are various measurable outcomes depending on the associated work package.
+
+\section{Project Management}
+\subsection{Potential Risks}
+That it can be categorically shown that neural networks produce no improvement in many areas of IR. This seems unlikely due to the literature which shows various improvements over non-neural baselines.
+
+\section{Impact and National Importance}
+% Which EPSRC questions does it answer.
+% THIS PROBLEM IS IMPORTANT BECAUSE
+EPSCRC information management category
+
+If successful the end product of this project will propel the information retrieval space forward to catch up with other fields in the application of neural networks.
+
+Not only that, there are information retrieval projects on going in relation to the government which make this of direct national interest.
+Here at the University of Glasgow, the Terrier team are working in collaboration with The National Archives in order to assist the sensitivity review process. This has come as a response to the growing number of digital documents which are archived every day.
+% Existing project which benefit -- sensitivity review at glasgow university, not always ad-hoc, but national archives can benefit.
+% huge undertaking with many many many digital documents
+
+Further the inner workings of commercial search engines are often obscured from the public in order to protect proprietary trade secrets. This means that the leaps and bounds made by the Googles of this world are not shared with the scientific community. A large scale project such as this one could effectively bring the information retrieval community forward into a new age of effectiveness.
+
+In terms of impact, if successful this project will provide the baseline for any further neural network based information retrieval research. This will be an extremely valuable addition to the scientific community. It also helps to answer some of the open questions in IR at the moment.
+
+% GIVE US THE MONEY PLEASE
+
+
+
+
+
+% Impact, a more clear and consolidated investigation into neural ir, with a clear goal and application.
+% data sets and models produced will help others to improve their neural ir models and show improvement on our results.
+% better open source IR for everyone
+% proof that NNs make a difference.
+% more complex IR
+% academic importance:
+% ir search engines can bake NNs in automatically, which is great news
+
+
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+\setlength{\itemsep}{-3pt}}
+
+\bibliographystyle{abbrv}
+%\setstretch{0.8}
+{
+\scriptsize
+\bibliography{prop.bib}
+}
 \end{document}
